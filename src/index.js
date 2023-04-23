@@ -1,17 +1,33 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { React } from 'react';
+import ReactDOM from 'react-dom';
+import './styles.css';
+import useTodo from './Hooks/useTodo';
+import TodoForm from './Components/TodoForm';
+import TodoList from './Components/TodoList';
+import { Typography } from '@mui/material';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+const App = () => {
+  const { todos, addTodo, updateTodo, deleteTodo } = useTodo('http://localhost:3000/tasks');
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  return (
+    <div className="App">
+      <Typography component="h1" variant="h2">
+        Todo List
+      </Typography>
+
+      <TodoForm
+        saveTodo={todoText => {
+          const trimmedText = todoText.trim();
+
+          if (trimmedText.length > 0) {
+            addTodo(trimmedText);
+          }
+        }}
+      />
+      <TodoList todos={todos} updateTodo={updateTodo} deleteTodo={deleteTodo} />
+    </div>
+  );
+};
+
+const rootElement = document.getElementById('root');
+ReactDOM.render(<App />, rootElement);
