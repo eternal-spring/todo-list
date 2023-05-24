@@ -14,8 +14,8 @@ function createTable() {
         port: dbConfig.port,
         max: 50,
         min: 0,
-        idleTimeoutMillis: 0,
-        connectionTimeoutMillis: 1000
+        idleTimeoutMillis: 10000,
+        connectionTimeoutMillis: 30000
     };
 
     const pool = new Pool(config);
