@@ -9,14 +9,13 @@
             "type": "chrome",
             "request": "launch",
             "name": "Run Chrome",
-            "url": "http://localhost:3001",
+            "url": "http://localhost:3001/home",
             "webRoot": "${workspaceFolder}/src",
             "runtimeArgs": ["--profile-directory=debug-profile"],
             "resolveSourceMapLocations": [
             "${workspaceFolder}/**",
             "!**/node_modules/**"
             ],
-            "breakOnLoad": true,
             "sourceMaps": true,
             "sourceMapPathOverrides": {
                 "*": "${webRoot}/*"
