@@ -3,3 +3,24 @@
     text-align: center;
     
   }
+
+.Form {
+  max-width: 330px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  padding: 30px;
+  margin-top: 30px;
+}
+
+.Form .login-button {
+  margin-top: 20px;
+  max-width: 330px;
+  min-width: 330px;
+  text-align: center;
+}
+
+.Form .message {
+  color: red;
+}

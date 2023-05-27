@@ -1,37 +1,39 @@
-import { useState, useEffect } from 'react';
-import { getTodos, postTodo, updateTodo, deleteTodo } from '../Services';
+import { useState, useEffect } from "react";
+import TaskService from "../Services/task";
 
-export default (url) => {
+const useTodo = (userId) => {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
     const getAllTodos = async () => {
-      const response = await getTodos(url);
+      const response = await TaskService.getTodos();
       console.log(response);
       setTodos(response);
     };
     getAllTodos();
-  }, [])
+  }, [userId]);
 
   return {
     todos,
 
-    addTodo: async description => {
-      await postTodo(url, {description: description, isDone: false});
-      const newTodos = await getTodos(url);
-      setTodos(newTodos);    
+    addTodo: async (description) => {
+      await TaskService.postTodo({ description: description, isDone: false });
+      const newTodos = await TaskService.getTodos();
+      setTodos(newTodos);
     },
 
-    updateTodo: async todo => {
-      await updateTodo(url, todo);
-      const newTodos = await getTodos(url);
+    updateTodo: async (todo) => {
+      await TaskService.updateTodo(todo);
+      const newTodos = await TaskService.getTodos();
       setTodos(newTodos);
     },
-    
-    deleteTodo: async id => {
-      await deleteTodo(url, id);
-      const newTodos = await getTodos(url);
+
+    deleteTodo: async (id) => {
+      await TaskService.deleteTodo(id);
+      const newTodos = await TaskService.getTodos();
       setTodos(newTodos);
-    }
+    },
   };
 };
+
+export default useTodo;

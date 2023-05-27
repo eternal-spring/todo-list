@@ -1,13 +1,13 @@
-import React from 'react';
-import { TextField } from '@mui/material';
-import useInput from '../Hooks/useInput';
+import React from "react";
+import { TextField } from "@mui/material";
+import useTodoInput from "../Hooks/useTodoInput";
 
 const TodoForm = ({ saveTodo }) => {
-  const { value, reset, onChange } = useInput();
+  const { value, reset, onChange } = useTodoInput();
 
   return (
     <form
-      onSubmit={event => {
+      onSubmit={(event) => {
         event.preventDefault();
 
         saveTodo(value);

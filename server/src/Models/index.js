@@ -1,28 +1,42 @@
-const fs = require('fs')
-const path = require('path')
-const basename = path.basename(__filename)
-const Sequelize = require('sequelize')
-const sequelize = require('../Config/sequelize')
+const fs = require("fs");
+const path = require("path");
+const basename = path.basename(__filename);
+const Sequelize = require("sequelize");
+const sequelize = require("../Config/sequelize");
 
-const db = {}
+const db = {};
 
-fs
-  .readdirSync(__dirname)
-  .filter(file => {
-    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js')
+fs.readdirSync(__dirname)
+  .filter((file) => {
+    return (
+      file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
+    );
   })
-  .forEach(file => {
-    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes)
-    db[model.name] = model
-  })
+  .forEach((file) => {
+    const model = require(path.join(__dirname, file))(
+      sequelize,
+      Sequelize.DataTypes
+    );
+    db[model.name] = model;
+  });
 
-Object.keys(db).forEach(modelName => {
+Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {
-    db[modelName].associate(db)
+    db[modelName].associate(db);
   }
-})
+});
 
-db.sequelize = sequelize
-db.Sequelize = Sequelize
+db.sequelize = sequelize;
+db.Sequelize = Sequelize;
 
-module.exports = db
+db.User.hasMany(db.Task, { as: "tasks" });
+db.Task.belongsTo(db.User, {
+  foreignKey: "UserId",
+  as: "task",
+});
+
+db.sequelize.sync({ alter: true, logging: console.log }).then(() => {
+  console.log("Resync Db");
+});
+
+module.exports = db;

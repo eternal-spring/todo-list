@@ -1,33 +1,33 @@
-const task = (sequelize, DataTypes) => {
-  const Task = sequelize.define(
-    "Task",
+const user = (sequelize, DataTypes) => {
+  const User = sequelize.define(
+    "User",
     {
       id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
       },
-      description: {
+      username: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
         validate: {
           notEmpty: true,
         },
       },
-      isDone: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
+      password: {
+        type: DataTypes.STRING,
       },
     },
     {
-      tableName: "tasks",
+      tableName: "users",
     },
     {
       timestamps: false,
     }
   );
 
-  return Task;
+  return User;
 };
 
-module.exports = task;
+module.exports = user;

@@ -1,13 +1,13 @@
-const config = require('./index')
+const config = require("./index");
 
 module.exports = {
-  dialect: 'postgres',
+  dialect: "postgres",
   define: {
-    timestamps: false
+    timestamps: false,
   },
   username: config.DATABASE_USERNAME,
   password: config.DATABASE_PASSWORD,
   database: config.DATABASE,
   host: config.DATABASE_HOST,
-  port: config.DATABASE_PORT
-}
+  port: config.DATABASE_PORT,
+};
