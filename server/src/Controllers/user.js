@@ -11,8 +11,9 @@ const handleSignup = async (req, res) => {
   try {
     const { username, password } = req.body;
     hashedPassword = bcrypt.hashSync(password, 10);
-    await userService.create({ username, password: hashedPassword });
-    await handleLogin(req, res);
+    await userService
+      .create({ username, password: hashedPassword })
+      .then(() => res.send({ message: "User was registered successfully!" }));
   } catch (err) {
     res.status(500).send(err.message);
   }
