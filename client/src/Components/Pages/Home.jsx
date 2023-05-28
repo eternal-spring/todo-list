@@ -7,7 +7,7 @@ import useAuth from "../../Hooks/useAuth";
 import LinkButton from "../LinkButton";
 
 const Home = () => {
-  const { handleLogout } = useAuth(true);
+  const { user, handleLogout } = useAuth(true);
   const { todos, addTodo, updateTodo, deleteTodo } = useTodo();
   return (
     <div className="Home">
@@ -25,7 +25,7 @@ const Home = () => {
         }}
       />
       <TodoList todos={todos} updateTodo={updateTodo} deleteTodo={deleteTodo} />
-      <LinkButton onClick={handleLogout}>Log out</LinkButton>
+      <div><Typography top="30px" left="30px" variant="h6" position="absolute">{user?.name}</Typography><LinkButton onClick={handleLogout}>Log out</LinkButton></div>
     </div>
   );
 };
