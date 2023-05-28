@@ -8,12 +8,12 @@ import { IconButton } from "@mui/material";
 import { DeleteForever } from "@mui/icons-material";
 
 const TodoList = ({ todos, updateTodo, deleteTodo }) => {
-  const listItems = todos.map((todo) => (
+  const sortedTodos = [...todos].sort((a, b) => a.id - b.id);
+  const listItems = sortedTodos.map((todo) => (
     <ListItem
       style={{ textDecoration: todo.isDone ? "line-through" : "none" }}
       key={todo.description}
       dense
-      button
     >
       <ListItemText primary={todo.description} />
       <Checkbox checked={todo.isDone} onChange={() => updateTodo(todo)} />
