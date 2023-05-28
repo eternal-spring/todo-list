@@ -52,7 +52,7 @@ const handleLogin = async (req, res) => {
       }
     );
 
-    res.status(200).send({ accessToken: token });
+    res.status(200).send({ id: user.id, name: user.username, accessToken: token });
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
