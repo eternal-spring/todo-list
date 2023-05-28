@@ -23,7 +23,7 @@ class AuthService {
     return axios.post(API_URL + "signup", {
       username,
       password,
-    })
+    });
   }
 
   getCurrentUser() {

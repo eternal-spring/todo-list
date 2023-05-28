@@ -7,19 +7,19 @@ const useLogin = (username, password) => {
   const [message, setMessage] = useState("");
   const handleLogin = (event) => {
     event?.preventDefault();
-      AuthService.login(username, password).then(
-        () => {
-          navigate("/home");
-          window.location.reload();
-        },
-        () => {
-          setMessage("Invalid username or password");
-        }
-      );
-    }
+    AuthService.login(username, password).then(
+      () => {
+        navigate("/home");
+        window.location.reload();
+      },
+      () => {
+        setMessage("Invalid username or password");
+      }
+    );
+  };
   return {
     message,
-    handleLogin
+    handleLogin,
   };
 };
 
